@@ -1,0 +1,110 @@
+.splash-wrapper {
+  position: fixed;
+  inset: 0;
+  background: #121212;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+
+  &.animando .splash-content {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.splash-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease;
+}
+
+.logo-ring {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-pulse {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: #1DB95420;
+  animation: pulse-ring 1.5s ease-out infinite;
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(0.8); opacity: 1; }
+  100% { transform: scale(1.4); opacity: 0; }
+}
+
+.logo-circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #1DB954, #158a3e);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  color: #fff;
+  box-shadow: 0 8px 32px #1DB95460;
+  animation: pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s both;
+}
+
+@keyframes pop {
+  from { transform: scale(0); }
+  to { transform: scale(1); }
+}
+
+.splash-title {
+  color: #fff;
+  font-size: 2rem;
+  font-weight: 900;
+  margin: 0;
+  letter-spacing: -1px;
+  animation: fadeUp 0.5s ease 0.6s both;
+}
+
+.splash-sub {
+  color: #B3B3B3;
+  font-size: 0.9rem;
+  margin: 0;
+  animation: fadeUp 0.5s ease 0.8s both;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.splash-bar {
+  width: 120px;
+  height: 3px;
+  background: #282828;
+  border-radius: 3px;
+  overflow: hidden;
+  margin-top: 8px;
+  animation: fadeUp 0.5s ease 1s both;
+}
+
+.splash-progress {
+  height: 100%;
+  background: #1DB954;
+  border-radius: 3px;
+  animation: progress 2s ease 0.8s both;
+}
+
+@keyframes progress {
+  from { width: 0%; }
+  to { width: 100%; }
+}

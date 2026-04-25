@@ -1,0 +1,50 @@
+<ion-content class="login-content">
+  <div class="login-wrapper">
+
+    <div class="login-top">
+      <ion-button fill="clear" class="back-btn" routerLink="/login">
+        ← Voltar
+      </ion-button>
+      <h1>Criar conta</h1>
+      <p>Comece a registrar sua música</p>
+    </div>
+
+    <div class="login-form">
+
+      <div class="input-group">
+        <span class="input-icon">👤</span>
+        <ion-input type="text" [(ngModel)]="nome"
+          placeholder="Seu nome completo"
+          class="custom-input">
+        </ion-input>
+      </div>
+
+      <div class="input-group">
+        <span class="input-icon">✉</span>
+        <ion-input type="email" [(ngModel)]="email"
+          placeholder="seu@email.com"
+          class="custom-input">
+        </ion-input>
+      </div>
+
+      <div class="input-group">
+        <span class="input-icon">🔒</span>
+        <ion-input type="password" [(ngModel)]="senha"
+          placeholder="Crie uma senha"
+          class="custom-input">
+        </ion-input>
+      </div>
+
+      <ion-button expand="block" class="btn-entrar" (click)="cadastrar()">
+        CRIAR CONTA
+      </ion-button>
+
+      <p class="termos">
+        Ao criar uma conta você concorda com os<br>
+        <span>Termos de Uso</span> do SoundDiary
+      </p>
+
+    </div>
+
+  </div>
+</ion-content>

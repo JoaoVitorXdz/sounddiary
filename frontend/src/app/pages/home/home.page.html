@@ -1,0 +1,108 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>SoundDiary</ion-title>
+    <div slot="end" class="header-avatar" routerLink="/perfil">
+      <img *ngIf="usuario?.foto_perfil" [src]="usuario.foto_perfil" class="header-foto">
+      <div *ngIf="!usuario?.foto_perfil" class="header-inicial">{{ usuario?.nome?.charAt(0) }}</div>
+    </div>
+    <ion-button slot="end" fill="clear" (click)="logout()">
+      <ion-icon name="log-out" style="color:#B3B3B3; font-size:1.3rem"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="home-content">
+
+  <!-- Saudação -->
+  <div class="welcome-section">
+    <p class="saudacao">{{ getSaudacao() }},</p>
+    <h1>{{ usuario?.nome }}</h1>
+  </div>
+
+  <!-- Stats rápidos -->
+  <div class="quick-stats" *ngIf="stats">
+    <div class="qs-card">
+      <span class="qs-value">{{ stats.total }}</span>
+      <span class="qs-label">Escutas</span>
+    </div>
+    <div class="qs-divider"></div>
+    <div class="qs-card">
+      <span class="qs-value">{{ stats.mediaAvaliacao }}★</span>
+      <span class="qs-label">Média</span>
+    </div>
+    <div class="qs-divider"></div>
+    <div class="qs-card">
+      <span class="qs-value">{{ stats.porGenero?.length || 0 }}</span>
+      <span class="qs-label">Gêneros</span>
+    </div>
+  </div>
+
+  <!-- Ações principais -->
+  <div class="section-label">Explorar</div>
+
+  <div class="menu-grid">
+  <div class="menu-card" routerLink="/feed">
+    <div class="card-top">
+      <div class="card-icon feed-icon">
+        <ion-icon name="musical-notes"></ion-icon>
+      </div>
+      <ion-icon name="chevron-forward" class="arrow-icon"></ion-icon>
+    </div>
+    <h3>Meu Feed</h3>
+    <p>Histórico de escutas</p>
+  </div>
+
+  <div class="menu-card" routerLink="/dashboard">
+    <div class="card-top">
+      <div class="card-icon dash-icon">
+        <ion-icon name="bar-chart"></ion-icon>
+      </div>
+      <ion-icon name="chevron-forward" class="arrow-icon"></ion-icon>
+    </div>
+    <h3>Dashboard</h3>
+    <p>Estatísticas musicais</p>
+  </div>
+
+  <div class="menu-card" routerLink="/favoritos">
+    <div class="card-top">
+      <div class="card-icon fav-icon">
+        <ion-icon name="heart"></ion-icon>
+      </div>
+      <ion-icon name="chevron-forward" class="arrow-icon"></ion-icon>
+    </div>
+    <h3>Favoritos</h3>
+    <p>Músicas salvas</p>
+  </div>
+
+  <div class="menu-card" routerLink="/perfil">
+    <div class="card-top">
+      <div class="card-icon perfil-icon">
+        <ion-icon name="person"></ion-icon>
+      </div>
+      <ion-icon name="chevron-forward" class="arrow-icon"></ion-icon>
+    </div>
+    <h3>Perfil</h3>
+    <p>Sua conta</p>
+  </div>
+</div>
+
+  <!-- Escutas recentes -->
+  <div *ngIf="recentes.length > 0">
+    <div class="section-label">Ouvidas recentemente</div>
+
+    <div class="recente-item" *ngFor="let r of recentes" routerLink="/feed">
+      <div class="recente-capa">
+        <img *ngIf="r.capa_url" [src]="r.capa_url" (error)="r.capa_url=null">
+        <span *ngIf="!r.capa_url">{{ r.artista?.charAt(0) }}</span>
+      </div>
+      <div class="recente-info">
+        <span class="recente-titulo">{{ r.titulo }}</span>
+        <span class="recente-artista">{{ r.artista }}</span>
+      </div>
+      <div class="recente-stars">
+        <span *ngFor="let s of [].constructor(r.avaliacao)">★</span>
+      </div>
+    </div>
+  </div>
+
+</ion-content>

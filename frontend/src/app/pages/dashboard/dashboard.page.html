@@ -1,0 +1,77 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-button slot="start" fill="clear" (click)="voltar()">
+      <ion-icon name="arrow-back" style="color:white"></ion-icon>
+    </ion-button>
+    <ion-title>Dashboard</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="dash-content">
+
+  <div class="empty-state" *ngIf="!stats">
+    <div class="loading-pulse"></div>
+    <p>Carregando estatísticas...</p>
+  </div>
+
+  <div *ngIf="stats">
+
+    <!-- Header com total destaque -->
+    <div class="dash-hero">
+      <div class="hero-number">{{ stats.total }}</div>
+      <div class="hero-label">músicas ouvidas</div>
+      <div class="hero-sub">avaliação média:
+        <span class="hero-stars">
+          <span *ngFor="let s of getEstrelas(stats.mediaAvaliacao)">★</span>
+          <span *ngFor="let s of getVazias(stats.mediaAvaliacao)">☆</span>
+        </span>
+        {{ stats.mediaAvaliacao }}
+      </div>
+    </div>
+
+    <!-- Cards de stats -->
+    <div class="stats-row">
+      <div class="stat-card">
+        <ion-icon name="musical-notes" class="stat-icon green"></ion-icon>
+        <span class="stat-value green">{{ stats.total }}</span>
+        <span class="stat-label">Escutas</span>
+      </div>
+      <div class="stat-card">
+        <ion-icon name="star" class="stat-icon purple"></ion-icon>
+        <span class="stat-value purple">{{ stats.mediaAvaliacao }}</span>
+        <span class="stat-label">Média</span>
+      </div>
+      <div class="stat-card">
+        <ion-icon name="headset" class="stat-icon amber"></ion-icon>
+        <span class="stat-value amber">{{ stats.porGenero?.length }}</span>
+        <span class="stat-label">Gêneros</span>
+      </div>
+    </div>
+
+    <!-- Gráfico de gêneros -->
+    <div class="section-header">
+      <span class="section-title">Por gênero</span>
+      <span class="section-total">{{ stats.total }} total</span>
+    </div>
+
+    <div class="genero-list">
+      <div class="genero-card" *ngFor="let g of stats.porGenero; let i = index">
+        <div class="genero-rank">#{{ i + 1 }}</div>
+        <div class="genero-body">
+          <div class="genero-info">
+            <span class="genero-nome">{{ g.genero || 'Sem gênero' }}</span>
+            <span class="genero-pct">{{ getPct(g.quantidade) }}%</span>
+          </div>
+          <div class="genero-bar">
+            <div class="genero-fill" [style.width]="getPct(g.quantidade) + '%'"
+              [class.gold]="i === 0" [class.silver]="i === 1" [class.bronze]="i === 2">
+            </div>
+          </div>
+          <span class="genero-qtd">{{ g.quantidade }} {{ g.quantidade === 1 ? 'escuta' : 'escutas' }}</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</ion-content>

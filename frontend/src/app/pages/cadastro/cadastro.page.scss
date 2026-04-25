@@ -1,0 +1,91 @@
+.login-content {
+  --background: #121212;
+}
+
+.login-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 1.5rem;
+  gap: 2rem;
+}
+
+.login-top {
+  .back-btn {
+    --color: #B3B3B3;
+    --padding-start: 0;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+
+  h1 {
+    color: #fff;
+    font-size: 2rem;
+    font-weight: 900;
+    margin: 0 0 0.3rem;
+    letter-spacing: -0.5px;
+  }
+
+  p {
+    color: #B3B3B3;
+    font-size: 0.9rem;
+    margin: 0;
+  }
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  background: #282828;
+  border-radius: 10px;
+  padding: 0 16px;
+  border: 1px solid transparent;
+  transition: border 0.2s;
+
+  &:focus-within {
+    border-color: #1DB954;
+  }
+
+  .input-icon {
+    font-size: 1rem;
+    margin-right: 10px;
+    opacity: 0.6;
+  }
+
+  ion-input {
+    --color: #fff;
+    --placeholder-color: #535353;
+    --padding-top: 14px;
+    --padding-bottom: 14px;
+    font-size: 0.95rem;
+  }
+}
+
+.btn-entrar {
+  --background: #1DB954;
+  --background-activated: #158a3e;
+  --border-radius: 50px;
+  --color: #000;
+  font-weight: 800;
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+  height: 54px;
+  margin-top: 4px;
+  box-shadow: 0 4px 20px #1DB95440;
+}
+
+.termos {
+  color: #535353;
+  font-size: 0.78rem;
+  text-align: center;
+  line-height: 1.6;
+  margin: 4px 0 0;
+
+  span { color: #1DB954; }
+}

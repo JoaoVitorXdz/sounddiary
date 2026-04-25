@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-button slot="start" fill="clear" (click)="voltar()">
+      <ion-icon name="arrow-back" style="color:white"></ion-icon>
+    </ion-button>
+    <ion-title>Favoritos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="fav-content">
+
+  <div class="empty-state" *ngIf="favoritos.length === 0">
+    <div class="empty-icon">🤍</div>
+    <p>Nenhuma música favoritada ainda.</p>
+    <p class="empty-hint">Toque no ♥ no feed para favoritar!</p>
+  </div>
+
+  <div class="fav-card" *ngFor="let f of favoritos">
+    <div class="fav-capa">
+      <img *ngIf="f.capa_url" [src]="f.capa_url" (error)="f.capa_url=null">
+      <span *ngIf="!f.capa_url">{{ f.artista?.charAt(0) }}</span>
+    </div>
+    <div class="fav-info">
+      <h4>{{ f.titulo }}</h4>
+      <p>{{ f.artista }}</p>
+      <span class="genero-tag">{{ f.genero }}</span>
+    </div>
+    <button class="remove-btn" (click)="remover(f.musica_id)">
+      <ion-icon name="heart" style="color:#1DB954; font-size:1.4rem"></ion-icon>
+    </button>
+  </div>
+
+</ion-content>

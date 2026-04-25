@@ -1,0 +1,103 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-button slot="start" fill="clear" (click)="voltar()">
+      <ion-icon name="arrow-back" style="color:white"></ion-icon>
+    </ion-button>
+    <ion-title>Perfil</ion-title>
+    <ion-button slot="end" fill="clear" (click)="editando ? cancelar() : iniciarEdicao()">
+      <ion-icon [name]="editando ? 'close' : 'create'"
+        [style.color]="editando ? '#ff4444' : '#1DB954'">
+      </ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="perfil-content">
+
+  <div class="perfil-hero">
+    <div class="avatar-wrapper" (click)="escolherFoto()">
+      <img *ngIf="usuario?.foto_perfil" [src]="usuario.foto_perfil" class="avatar-img">
+      <div *ngIf="!usuario?.foto_perfil" class="avatar">{{ getIniciais() }}</div>
+      <div class="camera-overlay">
+        <ion-icon name="camera" style="color:white; font-size:1.2rem"></ion-icon>
+      </div>
+    </div>
+    <h2>{{ usuario?.nome }}</h2>
+    <p>{{ usuario?.email }}</p>
+    <span class="foto-hint">Toque na foto para alterar</span>
+  </div>
+
+  <div *ngIf="!editando">
+    <div class="info-section">
+      <div class="section-label">INFORMAÇÕES DA CONTA</div>
+      <div class="info-card">
+        <div class="info-row">
+          <span class="info-label">Nome</span>
+          <span class="info-value">{{ usuario?.nome }}</span>
+        </div>
+        <div class="info-divider"></div>
+        <div class="info-row">
+          <span class="info-label">Email</span>
+          <span class="info-value">{{ usuario?.email }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-section">
+      <div class="section-label">SOBRE O APP</div>
+      <div class="info-card">
+        <div class="info-row">
+          <span class="info-label">Versão</span>
+          <span class="info-value">1.0.0</span>
+        </div>
+        <div class="info-divider"></div>
+        <div class="info-row">
+          <span class="info-label">Tecnologia</span>
+          <span class="info-value">Ionic + Angular</span>
+        </div>
+        <div class="info-divider"></div>
+        <div class="info-row">
+          <span class="info-label">Backend</span>
+          <span class="info-value">Node.js + MySQL</span>
+        </div>
+      </div>
+    </div>
+
+    <ion-button expand="block" class="logout-btn" (click)="logout()">
+      <ion-icon name="log-out" slot="start"></ion-icon>
+      Sair da conta
+    </ion-button>
+  </div>
+
+  <div *ngIf="editando" class="edit-section">
+    <div class="section-label">EDITAR PERFIL</div>
+    <div class="edit-card">
+      <div class="input-group">
+        <label>Nome</label>
+        <input type="text" [(ngModel)]="form.nome" placeholder="Seu nome" class="edit-input">
+      </div>
+      <div class="input-group">
+        <label>Email</label>
+        <input type="email" [(ngModel)]="form.email" placeholder="seu@email.com" class="edit-input">
+      </div>
+    </div>
+
+    <div class="section-label" style="margin-top:1.2rem">ALTERAR SENHA (opcional)</div>
+    <div class="edit-card">
+      <div class="input-group">
+        <label>Senha atual</label>
+        <input type="password" [(ngModel)]="form.senha_atual" placeholder="Digite a senha atual" class="edit-input">
+      </div>
+      <div class="input-group">
+        <label>Nova senha</label>
+        <input type="password" [(ngModel)]="form.nova_senha" placeholder="Digite a nova senha" class="edit-input">
+      </div>
+    </div>
+
+    <ion-button expand="block" class="save-btn" (click)="salvar()">
+      <ion-icon name="checkmark" slot="start"></ion-icon>
+      Salvar alterações
+    </ion-button>
+  </div>
+
+</ion-content>

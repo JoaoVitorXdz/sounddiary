@@ -1,0 +1,90 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-button slot="start" fill="clear" (click)="voltar()">
+      <ion-icon name="arrow-back" style="color:white"></ion-icon>
+    </ion-button>
+    <ion-title>Meu Feed</ion-title>
+    <ion-button slot="end" fill="clear" (click)="mostrarForm = !mostrarForm">
+      <ion-icon name="add" style="color:#1DB954; font-size:1.6rem"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+
+  <ion-toolbar class="search-toolbar">
+    <ion-searchbar
+      placeholder="Buscar músicas ou artistas..."
+      (ionInput)="filtrar($event)"
+      [debounce]="300"
+      color="dark">
+    </ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="feed-content">
+
+  <!-- Mini Player -->
+  <div class="mini-player" *ngIf="tocandoAgora">
+    <div class="player-info">
+      <div class="player-capa">{{ tocandoAgora.artista?.charAt(0) }}</div>
+      <div class="player-texts">
+        <span class="player-titulo">{{ tocandoAgora.titulo }}</span>
+        <span class="player-artista">{{ tocandoAgora.artista }}</span>
+      </div>
+    </div>
+    <div class="player-controls">
+      <button class="ctrl-btn" (click)="fecharPlayer()">✕</button>
+    </div>
+    <div id="youtube-player" style="display:none"></div>
+  </div>
+
+  <div class="form-section" *ngIf="mostrarForm">
+    <h3>Registrar escuta</h3>
+    <select [(ngModel)]="novoRegistro.musica_id" class="custom-select">
+      <option value="">Selecione uma música...</option>
+      <option *ngFor="let m of musicas" [value]="m.id">
+        {{ m.titulo }} — {{ m.artista }}
+      </option>
+    </select>
+    <div class="avaliacao-row">
+      <label>Avaliação:</label>
+      <input type="range" min="1" max="5" step="1" [(ngModel)]="novoRegistro.avaliacao">
+      <span>{{ novoRegistro.avaliacao }} ★</span>
+    </div>
+    <textarea [(ngModel)]="novoRegistro.comentario"
+      placeholder="O que achou dessa música?"
+      class="custom-textarea"></textarea>
+    <ion-button expand="block" class="btn-salvar" (click)="salvarRegistro()">Salvar</ion-button>
+  </div>
+
+  <div class="empty-state" *ngIf="registrosFiltrados.length === 0 && !mostrarForm">
+    <div class="empty-icon">🎵</div>
+    <p>{{ termoBusca ? 'Nenhum resultado encontrado.' : 'Nenhuma escuta registrada ainda.' }}</p>
+    <p class="empty-hint" *ngIf="!termoBusca">Toque no + para adicionar!</p>
+  </div>
+
+<div class="registro-card" *ngFor="let r of registrosFiltrados" (click)="tocar(r)">
+  <div class="registro-capa">
+    <img *ngIf="r.capa_url" [src]="r.capa_url" [alt]="r.titulo" (error)="r.capa_url=null">
+    <div *ngIf="!r.capa_url" class="capa-placeholder">{{ r.artista?.charAt(0) }}</div>
+  </div>
+  <div class="registro-info">
+    <h4 [class.tocando-titulo]="tocandoAgora?.musica_id === r.musica_id">{{ r.titulo }}</h4>
+    <p class="artista">{{ r.artista }}</p>
+    <div class="estrelas">
+      <span *ngFor="let s of estrelas(r.avaliacao)">★</span>
+    </div>
+    <p class="comentario" *ngIf="r.comentario">{{ r.comentario }}</p>
+    <p class="data">{{ r.ouvido_em | date:'dd/MM/yyyy HH:mm' }}</p>
+  </div>
+  <div class="card-actions">
+    <button class="fav-btn" (click)="toggleFavorito(r.musica_id, $event)">
+      <ion-icon [name]="favoritos.has(r.musica_id) ? 'heart' : 'heart-outline'"
+        [style.color]="favoritos.has(r.musica_id) ? '#1DB954' : '#535353'">
+      </ion-icon>
+    </button>
+    <button class="del-btn" (click)="deletarRegistro(r.id, $event)">
+      <ion-icon name="trash-outline" style="color:#535353; font-size:1.1rem"></ion-icon>
+    </button>
+  </div>
+</div>
+
+</ion-content>

@@ -1,0 +1,132 @@
+.login-content {
+  --background: #121212;
+}
+
+.login-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.5rem;
+  gap: 2rem;
+}
+
+.login-top {
+  text-align: center;
+
+  h1 {
+    color: #fff;
+    font-size: 2.2rem;
+    font-weight: 900;
+    margin: 1rem 0 0.3rem;
+    letter-spacing: -1px;
+  }
+
+  p {
+    color: #B3B3B3;
+    font-size: 0.9rem;
+    margin: 0;
+  }
+}
+
+.logo-ring {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #1DB954, #158a3e);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  box-shadow: 0 8px 32px #1DB95450;
+}
+
+.logo-circle {
+  font-size: 2.2rem;
+  color: #fff;
+}
+
+.login-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  background: #282828;
+  border-radius: 10px;
+  padding: 0 16px;
+  border: 1px solid transparent;
+  transition: border 0.2s;
+
+  &:focus-within {
+    border-color: #1DB954;
+  }
+
+  .input-icon {
+    font-size: 1rem;
+    margin-right: 10px;
+    opacity: 0.6;
+  }
+
+  ion-input {
+    --color: #fff;
+    --placeholder-color: #535353;
+    --padding-top: 14px;
+    --padding-bottom: 14px;
+    font-size: 0.95rem;
+  }
+}
+
+.btn-entrar {
+  --background: #1DB954;
+  --background-activated: #158a3e;
+  --border-radius: 50px;
+  --color: #000;
+  font-weight: 800;
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+  height: 54px;
+  margin-top: 4px;
+  box-shadow: 0 4px 20px #1DB95440;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 4px 0;
+
+  span {
+    flex: 1;
+    height: 1px;
+    background: #333;
+  }
+
+  p {
+    color: #535353;
+    font-size: 0.8rem;
+    margin: 0;
+  }
+}
+
+.btn-cadastro {
+  --border-radius: 50px;
+  --color: #fff;
+  --border-color: #535353;
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+  height: 54px;
+}
+
+.footer-text {
+  color: #535353;
+  font-size: 0.8rem;
+  text-align: center;
+  margin: 0;
+}
