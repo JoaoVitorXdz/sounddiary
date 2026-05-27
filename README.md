@@ -96,7 +96,7 @@ sounddiary/
 
 ## 👨‍💻 Desenvolvedor
 
-**JoaoVitorXdz**
+**JoaoVitor**, **Lilian Beatriz**
 
 ---
 
